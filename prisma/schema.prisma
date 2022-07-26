@@ -57,7 +57,7 @@ model Teachers {
   @@map("teachers")
 }
 
-model Disciplines {
+model Disciplines {sudo service postgresql status
   id                  Int         @id @default(autoincrement())
   name                String      @unique
   terms               Terms       @relation(fields: [termId], references: [id])

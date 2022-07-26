@@ -76,7 +76,7 @@ export async function getByTeacher() {
     const testsByTeacher: any = testsUtil.groupByCollumnType(tests, "teachers");
 
     const response = {
-        terms: testsByTeacher.map((teacher: { name: string, tests: Array<TestData> }) => {
+        teachers: testsByTeacher.map((teacher: { name: string, tests: Array<TestData> }) => {
             return {
                 name: teacher.name,
                 categories: testsByCategory.filter((category: { name: string, tests: Array<TestData> }) => {
