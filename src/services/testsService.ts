@@ -24,6 +24,7 @@ export async function create(name: string, pdfUrl: string, category: string, dis
 
     // ensure teacher teaches discipline
     const teacherDiscipline: TeachersDisciplines = await teachersDisciplinesRepository.getByDisciplineAndTeacherIds(existingDiscipline.id, existingTeacher.id);
+    if (!teacherDiscipline) throw { type: "error_conflict", message: "Teacher doesnt teach discipline." };
 
     await testsRepository.create(name, pdfUrl, existingCategory.id, teacherDiscipline.id);
 }
