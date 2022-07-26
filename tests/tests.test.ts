@@ -42,7 +42,7 @@ describe("POST /tests", () => {
                 discipline: "HTML e CSS",
                 teachers: "Diego Pinho"
             })
-            .set("Authorization", "bearer" + token);
+            .set("Authorization", "bearer " + token);
         expect(response.status).toBe(404);
     });
 
