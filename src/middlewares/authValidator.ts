@@ -3,8 +3,8 @@ import jwt from "jsonwebtoken";
 import "../setup.js";
 
 export async function validateToken(req, res, next) {
-    const authorization: string = req.headers.authorization || "";
-    const token: string = authorization.replace("Bearer ", "");
+    const authorization = req.header("Authorization");
+    const token = authorization.split(" ")[1];
 
     if (!token) {
         return res.status(401).send("Token required.");
