@@ -57,7 +57,7 @@ describe("POST /tests", () => {
                 discipline: "Inválida",
                 teachers: "Diego Pinho"
             })
-            .set("Authorization", "bearer" + token);
+            .set("Authorization", "bearer " + token);
         expect(response.status).toBe(404);
     });
 
@@ -72,7 +72,7 @@ describe("POST /tests", () => {
                 discipline: "HTML e CSS",
                 teachers: "Bruna Hamori"
             })
-            .set("Authorization", "bearer" + token);
+            .set("Authorization", "bearer " + token);
         expect(response.status).toBe(409);
     });
 
@@ -87,7 +87,7 @@ describe("POST /tests", () => {
                 discipline: "HTML e CSS",
                 teachers: "Diego Pinho"
             })
-            .set("Authorization", "bearer" + token);
+            .set("Authorization", "bearer " + token);
         expect(response.status).toBe(401);
     });
 });
@@ -97,7 +97,7 @@ describe("GET /tests/terms", () => {
         const { token } = await getToken();
         const response = await agent
             .get("/tests/terms")
-            .set("Authorization", "bearer" + token);
+            .set("Authorization", "bearer " + token);
         expect(response.status).toBe(201);
         expect(response.body).toBeInstanceOf(Object);
     });
@@ -106,7 +106,7 @@ describe("GET /tests/terms", () => {
         const token = "invalid_token";
         const response = await agent
             .get("/tests/terms")
-            .set("Authorization", "bearer" + token);
+            .set("Authorization", "bearer " + token);
         expect(response.status).toBe(401);
     });
 });
@@ -116,7 +116,7 @@ describe("GET /tests/teachers", () => {
         const { token } = await getToken();
         const response = await agent
             .get("/tests/teachers")
-            .set("Authorization", "bearer" + token);
+            .set("Authorization", "bearer " + token);
         expect(response.status).toBe(201);
         expect(response.body).toBeInstanceOf(Object);
     });
@@ -125,7 +125,7 @@ describe("GET /tests/teachers", () => {
         const token = "invalid_token";
         const response = await agent
             .get("/tests/teachers")
-            .set("Authorization", "bearer" + token);
+            .set("Authorization", "bearer " + token);
         expect(response.status).toBe(401);
     });
 });
