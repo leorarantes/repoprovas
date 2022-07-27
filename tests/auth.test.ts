@@ -1,10 +1,12 @@
 import supertest from 'supertest';
+import {jest} from '@jest/globals';
 
 import app from "../src/app";
 import { createUser, user } from "./factories/authFactory.js";
 import prisma from "../src/database.js";
 
 const agent = supertest(app);
+jest.setTimeout(15000);
 
 beforeEach(async () => {
     await prisma.$executeRaw`DELETE FROM users WHERE email = ${user.email}`;

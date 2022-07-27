@@ -1,10 +1,12 @@
 import supertest from 'supertest';
+import {jest} from '@jest/globals';
 
 import app from "../src/app";
 import { createUser, getToken, user } from "./factories/authFactory.js";
 import prisma from "../src/database.js";
 
 const agent = supertest(app);
+jest.setTimeout(10000);
 
 beforeAll(async () => {
     await prisma.$executeRaw`DELETE FROM users WHERE email = ${user.email}`;
@@ -25,9 +27,9 @@ describe("POST /tests", () => {
                 pdfUrl: "http://testeteste.com",
                 category: "Projeto",
                 discipline: "HTML e CSS",
-                teachers: "Diego Pinho"
+                teacher: "Diego Pinho"
             })
-            .set("Authorization", "bearer" + token);
+            .set("Authorization", "bearer " + token);
         expect(response.status).toBe(200);
     });
 
@@ -40,9 +42,9 @@ describe("POST /tests", () => {
                 pdfUrl: "http://testeteste.com",
                 category: "Inválida",
                 discipline: "HTML e CSS",
-                teachers: "Diego Pinho"
+                teacher: "Diego Pinho"
             })
-            .set("Authorization", "bearer" + token);
+            .set("Authorization", "bearer " + token);
         expect(response.status).toBe(404);
     });
 
@@ -55,7 +57,7 @@ describe("POST /tests", () => {
                 pdfUrl: "http://testeteste.com",
                 category: "Projeto",
                 discipline: "Inválida",
-                teachers: "Diego Pinho"
+                teacher: "Diego Pinho"
             })
             .set("Authorization", "bearer " + token);
         expect(response.status).toBe(404);
@@ -70,7 +72,7 @@ describe("POST /tests", () => {
                 pdfUrl: "http://testeteste.com",
                 category: "Projeto",
                 discipline: "HTML e CSS",
-                teachers: "Bruna Hamori"
+                teacher: "Bruna Hamori"
             })
             .set("Authorization", "bearer " + token);
         expect(response.status).toBe(409);
@@ -85,7 +87,7 @@ describe("POST /tests", () => {
                 pdfUrl: "http://testeteste.com",
                 category: "Projeto",
                 discipline: "HTML e CSS",
-                teachers: "Diego Pinho"
+                teacher: "Diego Pinho"
             })
             .set("Authorization", "bearer " + token);
         expect(response.status).toBe(401);
