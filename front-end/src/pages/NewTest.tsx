@@ -26,6 +26,7 @@ function NewTest() {
         teacher: "",
         discipline: "",
         category: "",
+        pdfUrl: "",
         name: ""
     });
 
@@ -156,6 +157,18 @@ function NewTest() {
                         renderInput={(params) => <TextField
                             {...params}
                             label="Digite o nome da categoria"
+                        />}
+                    />
+                    <Autocomplete
+                        id="pdfUrl"
+                        options={[]}
+                        freeSolo
+                        inputValue={formData.pdfUrl}
+                        onInputChange={handleInputChange}
+                        sx={{ marginBottom: "16px", width: "450px" }}
+                        renderInput={(params) => <TextField
+                            {...params}
+                            label="Digite a URL da prova"
                         />}
                     />
                     <Autocomplete

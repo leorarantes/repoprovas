@@ -75,6 +75,7 @@ export interface NewTestData {
   teacher: string;
   discipline: string;
   category: string;
+  pdfUrl: string;
   name: string;
 }
 
