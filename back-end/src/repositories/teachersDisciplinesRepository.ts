@@ -11,3 +11,31 @@ export async function getByDisciplineAndTeacherIds(disciplineId: number, teacher
     });
     return teachersDisciplines;
 }
+
+export async function getTestsByTeacher() {
+    const testsByTeacher = await prisma.teachersDisciplines.findMany({
+        select: {
+            id: true,
+            disciplines: true,
+            teachers: {
+                select: {
+                    id: true,
+                    name: true,
+                    teachersDisciplines: {
+                        select: {
+                            disciplines: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                    terms: true
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            tests: true
+        }
+    });
+    return testsByTeacher;
+}

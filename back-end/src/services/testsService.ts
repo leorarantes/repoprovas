@@ -1,10 +1,11 @@
-import { Categories, Disciplines, Teachers, TeachersDisciplines } from "@prisma/client";
+import { Categories, Disciplines, Teachers, TeachersDisciplines, Terms } from "@prisma/client";
 
 import "../setup.js";
 import * as testsRepository from "../repositories/testsRepository.js";
 import * as categoriesRepository from "../repositories/categoriesRepository.js";
 import * as disciplinesRepository from "../repositories/disciplinesRepository.js";
 import * as teachersRepository from "../repositories/teachersRepository.js";
+import * as termsRepository from "../repositories/termsRepository.js";
 import * as testsUtil from "../utils/testsUtil.js";
 import * as teachersDisciplinesRepository from "../repositories/teachersDisciplinesRepository.js";
 import { TestData } from "../utils/interfaces.js";
@@ -30,11 +31,45 @@ export async function create(name: string, pdfUrl: string, category: string, dis
 }
 
 export async function getByDiscipline() {
-    const tests: Array<TestData> = await testsRepository.getAll();
+    const testsByDiscipline = await termsRepository.getTestsByTerm();
+    const response = testsByDiscipline.map(term => {
+        return {
+            id: term.id,
+            number: term.number,
+            disciplines: term.disciplines.map(discipline => {
+                return {
+                    id: discipline.id,
+                    name: discipline.name,
+                    teacherDisciplines: discipline.teachersDisciplines.map(teacherDiscipline => {
+                        return {
+                            id: teacherDiscipline.id,
+                            discipline: {
+                                            id: teacherDiscipline.disciplines.id,
+                                            name: teacherDiscipline.disciplines.name,
+                                            term: teacherDiscipline.disciplines.terms
+                                        },
+                            teacher: teacherDiscipline.teachers,
+                            tests: teacherDiscipline.tests.map(test => {
+                                return {
+                                    id: test.id,
+                                    name: test.name,
+                                    pdfUrl: test.pdfUrl,
+                                    categories: test.categories
+                                }
+                            })
+                        }
+                    }),
+                    term: discipline.terms
+                }
+            })
+        }
+    });
+    return response;
 
-    const testsByCategory: any = testsUtil.groupByCollumnType(tests, "categories");
+    /*const testsByCategory: any = testsUtil.groupByCollumnType(tests, "categories");
     const testsByDiscipline: any = testsUtil.groupByCollumnType(tests, "disciplines");
     const testsByTerm: any = testsUtil.groupByCollumnType(tests, "terms");
+    console.log(testsByTerm);
 
     const response = {
         terms: testsByTerm.map((term: { number: number, tests: Array<TestData> }) => {
@@ -66,12 +101,31 @@ export async function getByDiscipline() {
             }
         })
     };
-
-    return response;
+    */
 }
 
 export async function getByTeacher() {
-    const tests: Array<TestData> = await testsRepository.getAll();
+    const testsByTeacher = await teachersDisciplinesRepository.getTestsByTeacher();
+    const response = testsByTeacher.map(teachersDisciplines => {
+        return {
+            id: teachersDisciplines.id,
+            discipline: teachersDisciplines.disciplines,
+            teacher: {
+                id: teachersDisciplines.teachers.id,
+                name: teachersDisciplines.teachers.name
+            },
+            tests: teachersDisciplines.tests,
+            disciplines: teachersDisciplines.teachers.teachersDisciplines.map(element => {
+                return {
+                    id: element.disciplines.id,
+                    name: element.disciplines.name,
+                    term: element.disciplines.terms
+                }
+            })
+        }
+    });
+    return response;
+    /*const tests: Array<TestData> = await testsRepository.getAll();
 
     const testsByCategory: any = testsUtil.groupByCollumnType(tests, "categories");
     const testsByTeacher: any = testsUtil.groupByCollumnType(tests, "teachers");
@@ -98,6 +152,5 @@ export async function getByTeacher() {
             }
         })
     }
-
-    return response;
+    */
 }

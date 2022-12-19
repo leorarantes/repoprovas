@@ -31,7 +31,8 @@ model Tests {
   name                String              @unique
   pdfUrl              String
   categories          Categories          @relation(fields: [categoryId], references: [id])
-  categoryId        Int
+  categoryId          Int
+  
   teachersDisciplines TeachersDisciplines @relation(fields: [teacherDisciplineId], references: [id])
   teacherDisciplineId Int
 
@@ -57,7 +58,7 @@ model Teachers {
   @@map("teachers")
 }
 
-model Disciplines {sudo service postgresql status
+model Disciplines {
   id                  Int         @id @default(autoincrement())
   name                String      @unique
   terms               Terms       @relation(fields: [termId], references: [id])
