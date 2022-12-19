@@ -52,7 +52,7 @@ export async function getByDiscipline() {
                                     id: test.id,
                                     name: test.name,
                                     pdfUrl: test.pdfUrl,
-                                    categories: test.categories
+                                    category: test.categories
                                 }
                             })
                         }
