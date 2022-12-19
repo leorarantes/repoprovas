@@ -3,8 +3,8 @@ import { Request, Response } from "express";
 import * as testsService from "../services/testsService.js";
 
 export async function create(req: Request, res: Response) {
-    const { name, pdfUrl, category, discipline, teacher }: { name: string, pdfUrl: string, category: string, discipline: string, teacher: string } = req.body;
-    await testsService.create(name, pdfUrl, category, discipline, teacher);
+    const { teacher, discipline, category, pdfUrl, name }: { teacher: string, discipline: string, category: string, pdfUrl: string, name: string } = req.body;
+    await testsService.create(teacher, discipline, category, pdfUrl, name);
     res.sendStatus(200);
 };
 
