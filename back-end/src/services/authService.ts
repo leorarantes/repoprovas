@@ -1,6 +1,8 @@
 import bcrypt from "bcrypt";
 import { Users } from "@prisma/client";
 import jwt from "jsonwebtoken";
+import axios from "axios";
+import qs from "query-string";
 
 import { ensureUserDoesntExist, ensureUserExistsAndGetData } from "../utils/usersUtil.js";
 import "../setup.js";
@@ -21,7 +23,7 @@ export async function signIn(email: string, password: string) {
 
     // validate password
     const encryptedPassword: string = existingUser.password;
-    if(!bcrypt.compareSync(password, encryptedPassword)) {
+    if (!bcrypt.compareSync(password, encryptedPassword)) {
         throw { type: "error_unauthorized", message: "Invalid password." };
     }
 
@@ -29,6 +31,43 @@ export async function signIn(email: string, password: string) {
     const token: string = jwt.sign(
         {
             id: existingUser.id,
+        },
+        process.env.JWT_SECRET
+    );
+    return { token };
+}
+
+export async function signInWithGitHub(code: string) {
+    // get GitHub token
+    const GITHUB_ACCESS_TOKEN_URL = 'https://github.com/login/oauth/access_token';
+    const { REDIRECT_URL, CLIENT_ID, CLIENT_SECRET } = process.env;
+    const params = {
+        code,
+        grant_type: 'authorization_code',
+        redirect_uri: REDIRECT_URL,
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
+    };
+
+    const { data }: { data: any } = await axios.post(GITHUB_ACCESS_TOKEN_URL, params, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+    const gitHubToken: string | string[] = qs.parse(data).access_token;
+
+    // fetch user
+    const response = await axios.get("https://api.github.com/user", {
+        headers: {
+            Authorization: `Bearer ${gitHubToken}`,
+        },
+    });
+    const user: any = response.data;
+
+    // get app token
+    const token: string = jwt.sign(
+        {
+            id: user.id,
         },
         process.env.JWT_SECRET
     );

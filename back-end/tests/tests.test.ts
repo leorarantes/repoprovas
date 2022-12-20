@@ -23,11 +23,11 @@ describe("POST /tests", () => {
         const response = await agent
             .post("/tests")
             .send({
-                name: "testeteste",
-                pdfUrl: "http://testeteste.com",
-                category: "Projeto",
+                teacher: "Diego Pinho",
                 discipline: "HTML e CSS",
-                teacher: "Diego Pinho"
+                category: "Projeto",
+                pdfUrl: "http://testeteste.com",
+                name: "testeteste"
             })
             .set("Authorization", "bearer " + token);
         expect(response.status).toBe(200);
@@ -38,11 +38,11 @@ describe("POST /tests", () => {
         const response = await agent
             .post("/tests")
             .send({
-                name: "testeteste",
-                pdfUrl: "http://testeteste.com",
-                category: "Inválida",
+                teacher: "Diego Pinho",
                 discipline: "HTML e CSS",
-                teacher: "Diego Pinho"
+                category: "Inválida",
+                pdfUrl: "http://testeteste.com",
+                name: "testeteste"
             })
             .set("Authorization", "bearer " + token);
         expect(response.status).toBe(404);
@@ -53,11 +53,11 @@ describe("POST /tests", () => {
         const response = await agent
             .post("/tests")
             .send({
-                name: "testeteste",
-                pdfUrl: "http://testeteste.com",
-                category: "Projeto",
+                teacher: "Diego Pinho",
                 discipline: "Inválida",
-                teacher: "Diego Pinho"
+                category: "Projeto",
+                pdfUrl: "http://testeteste.com",
+                name: "testeteste"
             })
             .set("Authorization", "bearer " + token);
         expect(response.status).toBe(404);
@@ -68,11 +68,11 @@ describe("POST /tests", () => {
         const response = await agent
             .post("/tests")
             .send({
-                name: "testeteste",
-                pdfUrl: "http://testeteste.com",
-                category: "Projeto",
+                teacher: "Bruna Hamori",
                 discipline: "HTML e CSS",
-                teacher: "Bruna Hamori"
+                category: "Projeto",
+                pdfUrl: "http://testeteste.com",
+                name: "testeteste"
             })
             .set("Authorization", "bearer " + token);
         expect(response.status).toBe(409);
@@ -83,11 +83,11 @@ describe("POST /tests", () => {
         const response = await agent
             .post("/tests")
             .send({
-                name: "testeteste",
-                pdfUrl: "http://testeteste.com",
-                category: "Projeto",
+                teacher: "Diego Pinho",
                 discipline: "HTML e CSS",
-                teacher: "Diego Pinho"
+                category: "Projeto",
+                pdfUrl: "http://testeteste.com",
+                name: "testeteste"
             })
             .set("Authorization", "bearer " + token);
         expect(response.status).toBe(401);
