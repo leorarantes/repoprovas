@@ -1,12 +1,16 @@
 import axios from "axios";
 
 const baseAPI = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: process.env.REACT_APP_BACK_END_URL,
 });
 
 interface UserData {
   email: string;
   password: string;
+}
+
+interface CodeData {
+  code: string | (string | null)[] | null;
 }
 
 function getConfig(token: string) {
@@ -22,7 +26,11 @@ async function signUp(signUpData: UserData) {
 }
 
 async function signIn(signInData: UserData) {
-  return baseAPI.post<{ token: string }>("/sign-in", signInData);
+  return await baseAPI.post<{ token: string }>("/sign-in", signInData);
+}
+
+async function signInWithGitHub(code: CodeData) {
+  return await baseAPI.post<{ token: string }>("/sign-in/github", code);
 }
 
 export interface Term {
@@ -119,6 +127,7 @@ async function newTest(newTestData: NewTestData, token: string) {
 const api = {
   signUp,
   signIn,
+  signInWithGitHub,
   getTestsByDiscipline,
   getTestsByTeacher,
   getCategories,

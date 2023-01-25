@@ -15,3 +15,10 @@ export async function getByEmail(email: string) {
     }});
     return user;
 }
+
+export async function getByPassword(password: string) {
+    const users: any = await prisma.users.findMany({where: {
+        password
+    }});
+    return users;
+}

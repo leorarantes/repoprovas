@@ -8,7 +8,7 @@ interface Props {
   redirectPath?: string;
 }
 
-export function MainApp({ redirectPath = "/login" }: Props) {
+export function MainApp({ redirectPath = "/" }: Props) {
   const navigate = useNavigate();
   const { token, signOut } = useAuth();
   if (!token) {
@@ -16,7 +16,7 @@ export function MainApp({ redirectPath = "/login" }: Props) {
   }
 
   function handleSignOut() {
-    navigate("/login");
+    navigate("/");
     signOut();
   }
 

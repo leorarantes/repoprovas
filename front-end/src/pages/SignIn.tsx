@@ -7,8 +7,10 @@ import {
   Typography,
 } from "@mui/material";
 import { AxiosError } from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
+import qs from "query-string";
+
 import { ReactComponent as Logo } from "../assets/logo.svg";
 import Form from "../components/Form";
 import PasswordInput from "../components/PasswordInput";
@@ -54,6 +56,32 @@ function SignIn() {
     password: "",
   });
 
+  useEffect(() => {
+    async function checkIfUserIsReturningFromGitHub() {
+      const { code } = qs.parseUrl(window.location.href).query;
+
+      if (code) {
+        setMessage(null);
+  
+        try {
+          const {
+            data: { token }
+          } = await api.signInWithGitHub({ code });
+          signIn(token);
+          navigate("/app/disciplinas");
+        } catch (error: Error | AxiosError | any) {
+          if (error.response) {
+            setMessage({
+              type: "error",
+              text: error.response.data,
+            });
+          }
+        }
+      }
+    }
+    checkIfUserIsReturningFromGitHub();
+  }, [formData]);
+
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
@@ -91,6 +119,20 @@ function SignIn() {
     }
   }
 
+  function redirectToGitHub() {
+    const params = {
+      response_type: 'code',
+      scope: 'user public_repo',
+      client_id: process.env.REACT_APP_CLIENT_ID,
+      redirect_uri: process.env.REACT_APP_REDIRECT_URL,
+      state: 'repoprovas'
+    }
+
+    const queryStrings = qs.stringify(params);
+    const authorizationUrl = `https://github.com/login/oauth/authorize?${queryStrings}`;
+    window.location.href = authorizationUrl;
+  }
+
   return (
     <Form onSubmit={handleSubmit}>
       <Logo />
@@ -98,7 +140,7 @@ function SignIn() {
         <Typography sx={styles.title} variant="h4" component="h1">
           Login
         </Typography>
-        <Button variant="contained" color="secondary">
+        <Button variant="contained" color="secondary" onClick={redirectToGitHub} >
           Entrar com Github
         </Button>
         <Box sx={styles.dividerContainer}>

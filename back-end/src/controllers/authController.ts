@@ -15,7 +15,7 @@ export async function signIn(req: Request, res: Response) {
 };
 
 export async function signInWithGitHub(req: Request, res: Response) {
-    const { code }: { code: string } = req.body;
+    const { code }: { code: string | (string | null)[] } = req.body;
     const token = await authService.signInWithGitHub(code);
     res.status(201).send(token);
 };

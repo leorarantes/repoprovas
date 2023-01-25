@@ -37,9 +37,8 @@ export async function signIn(email: string, password: string) {
     return { token };
 }
 
-export async function signInWithGitHub(code: string) {
+export async function signInWithGitHub(code: string | (string | null)[]) {
     // get GitHub token
-    const GITHUB_ACCESS_TOKEN_URL = 'https://github.com/login/oauth/access_token';
     const { REDIRECT_URL, CLIENT_ID, CLIENT_SECRET } = process.env;
     const params = {
         code,
@@ -49,20 +48,20 @@ export async function signInWithGitHub(code: string) {
         client_secret: CLIENT_SECRET,
     };
 
-    const { data }: { data: any } = await axios.post(GITHUB_ACCESS_TOKEN_URL, params, {
+    const { data: gitHubTokenData }: { data: any } = await axios.post('https://github.com/login/oauth/access_token', params, {
         headers: {
             'Content-Type': 'application/json'
         },
     });
-    const gitHubToken: string | string[] = qs.parse(data).access_token;
+    const gitHubToken: string | string[] = qs.parse(gitHubTokenData).access_token;
 
     // fetch user
-    const response = await axios.get("https://api.github.com/user", {
+    const { data: userData }: { data: any } = await axios.get("https://api.github.com/user", {
         headers: {
             Authorization: `Bearer ${gitHubToken}`,
         },
     });
-    const user: any = response.data;
+    const user: any = userData;
 
     // get app token
     const token: string = jwt.sign(
