@@ -16,6 +16,11 @@
         {
             "src": "package.json",
             "use": "@vercel/node",
+            "config": { "command": "ls -l" }
+        },
+        {
+            "src": "package.json",
+            "use": "@vercel/node",
             "config": { "command": "node dist/src/index.js" }
         }
     ],
