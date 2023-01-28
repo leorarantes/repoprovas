@@ -2,19 +2,6 @@
     "name": "repoprovas",
     "version": 2,
     "public": true,
-    "buildCommand": "pwd",
-    "builds": [
-        {
-            "src": "package.json",
-            "use": "@vercel/node",
-            "config": { "command": "build" }
-        },
-        {
-            "src": "package.json",
-            "use": "@vercel/node",
-            "config": { "command": "start" }
-        }
-    ],
     "routes": [
         {
             "src": "/(.*)",
