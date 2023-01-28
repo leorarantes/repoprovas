@@ -2,32 +2,23 @@
     "name": "repoprovas",
     "version": 2,
     "public": true,
+    "buildCommand": "pwd",
     "builds": [
         {
             "src": "package.json",
             "use": "@vercel/node",
-            "config": { "command": "npm i" }
+            "config": { "command": "build" }
         },
         {
             "src": "package.json",
             "use": "@vercel/node",
-            "config": { "command": "rm -rf ./dist && tsc" }
-        },
-        {
-            "src": "package.json",
-            "use": "@vercel/node",
-            "config": { "command": "pwd" }
-        },
-        {
-            "src": "package.json",
-            "use": "@vercel/node",
-            "config": { "command": "node dist/src/index.js" }
+            "config": { "command": "start" }
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "dist/index.js"
+            "dest": "dist/src/index.js"
         }
     ]
 }
