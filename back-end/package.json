@@ -1,14 +1,14 @@
 {
-  "name": "projeto20-repoprovas",
+  "name": "repoprovas",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/index.js",
   "type": "module",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf ./dist && tsc",
     "start": "node dist/src/index.js",
     "dev": "nodemon src/index.ts",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest -i"
