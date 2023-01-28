@@ -6,12 +6,17 @@
         {
             "src": "package.json",
             "use": "@vercel/node",
-            "config": { "command": "npm run build" }
+            "config": { "command": "npm i" }
         },
         {
             "src": "package.json",
             "use": "@vercel/node",
-            "config": { "command": "npm run start" }
+            "config": { "command": "rm -rf ./dist && tsc" }
+        },
+        {
+            "src": "package.json",
+            "use": "@vercel/node",
+            "config": { "command": "node dist/src/index.js" }
         }
     ],
     "routes": [
