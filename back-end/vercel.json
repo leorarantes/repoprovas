@@ -2,6 +2,11 @@
     "version": 2,
     "builds": [
         {
+            "src": "package.json",
+            "use": "@vercel/build-utils",
+            "config": { "command": "npm run build" }
+        },
+        {
             "src": "dist/src/index.js",
             "use": "@vercel/node",
             "config": { "includeFiles": ["dist/**"] }
