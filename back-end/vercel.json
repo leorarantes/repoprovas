@@ -5,13 +5,13 @@
     "builds": [
         {
             "src": "package.json",
-            "use": "@vercel/npm",
-            "config": { "command": "build" }
+            "use": "@vercel/node",
+            "config": { "command": "npm run build" }
         },
         {
             "src": "package.json",
-            "use": "@vercel/npm",
-            "config": { "command": "start" }
+            "use": "@vercel/node",
+            "config": { "command": "npm run start" }
         }
     ],
     "routes": [
