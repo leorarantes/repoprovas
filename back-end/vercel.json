@@ -16,7 +16,7 @@
         {
             "src": "package.json",
             "use": "@vercel/node",
-            "config": { "command": "ls -l" }
+            "config": { "command": "pwd" }
         },
         {
             "src": "package.json",
