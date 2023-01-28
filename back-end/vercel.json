@@ -1,6 +1,6 @@
 {
     "name": "repoprovas",
-    "version": "2",
+    "version": 2,
     "public": true,
     "builds": [
         {
