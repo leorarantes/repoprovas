@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "rm -rf ./dist && tsc",
+    "build": "rm -rf ./dist && tsc && npm start",
     "start": "node dist/src/index.js",
     "dev": "nodemon src/index.ts",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest -i"
