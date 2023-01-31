@@ -34,7 +34,11 @@ export async function getTestsByTeacher() {
                     }
                 }
             },
-            tests: true
+            tests: {
+                include: {
+                    categories: true
+                }
+            }
         }
     });
     return testsByTeacher;

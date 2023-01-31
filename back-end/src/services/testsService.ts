@@ -75,7 +75,14 @@ export async function getByTeacher() {
                 id: teachersDisciplines.teachers.id,
                 name: teachersDisciplines.teachers.name
             },
-            tests: teachersDisciplines.tests,
+            tests: teachersDisciplines.tests.map(element => {
+                return {
+                    id: element.id,
+                    name: element.name,
+                    pdfUrl: element.pdfUrl,
+                    category: element.categories
+                };
+            }),
             disciplines: teachersDisciplines.teachers.teachersDisciplines.map(element => {
                 return {
                     id: element.disciplines.id,
