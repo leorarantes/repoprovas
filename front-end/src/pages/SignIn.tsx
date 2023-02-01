@@ -11,7 +11,7 @@ import React, { useState, useEffect } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import qs from "query-string";
 
-import { ReactComponent as Logo } from "../assets/logo.svg";
+import { ReactComponent as Logo } from "../assets/images/logo.svg";
 import Form from "../components/Form";
 import PasswordInput from "../components/PasswordInput";
 import useAlert from "../hooks/useAlert";
@@ -20,7 +20,7 @@ import api from "../services/api";
 
 const styles = {
   container: {
-    marginTop: "180px",
+    marginTop: "50px",
     width: "460px",
     display: "flex",
     flexDirection: "column",
@@ -167,7 +167,7 @@ function SignIn() {
           value={formData.password}
         />
         <Box sx={styles.actionsContainer}>
-          <Link component={RouterLink} to="/">
+          <Link component={RouterLink} to="/sign-up">
             <Typography>Não possuo cadastro</Typography>
           </Link>
           <Button variant="contained" type="submit">

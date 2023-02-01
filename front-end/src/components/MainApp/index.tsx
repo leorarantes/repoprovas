@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import { ReactComponent as Logo } from "../../assets/logo.svg";
-import { ReactComponent as SignOutIcon } from "../../assets/signout.svg";
+import { ReactComponent as Logo } from "../../assets/images/logo.svg";
+import { ReactComponent as SignOutIcon } from "../../assets/images/signout.svg";
 import useAuth from "../../hooks/useAuth";
 
 interface Props {

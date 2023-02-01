@@ -9,7 +9,7 @@ import {
 import { AxiosError } from "axios";
 import React, { useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import { ReactComponent as Logo } from "../assets/logo.svg";
+import { ReactComponent as Logo } from "../assets/images/logo.svg";
 import Form from "../components/Form";
 import PasswordInput from "../components/PasswordInput";
 import useAlert from "../hooks/useAlert";
@@ -17,7 +17,7 @@ import api from "../services/api";
 
 const styles = {
   container: {
-    marginTop: "180px",
+    marginTop: "50px",
     width: "460px",
     display: "flex",
     flexDirection: "column",
@@ -81,7 +81,7 @@ function SignUp() {
     try {
       await api.signUp({ email, password });
       setMessage({ type: "success", text: "Cadastro efetuado com sucesso!" });
-      navigate("/login");
+      navigate("/");
     } catch (error: Error | AxiosError | any) {
       if (error.response) {
         setMessage({
@@ -138,7 +138,7 @@ function SignUp() {
           value={formData.passwordConfirmation}
         />
         <Box sx={styles.actionsContainer}>
-          <Link component={RouterLink} to="/login">
+          <Link component={RouterLink} to="/">
             <Typography>Já possuo cadastro</Typography>
           </Link>
           <Button variant="contained" type="submit">
