@@ -32,7 +32,7 @@ export function MainApp({ redirectPath = "/" }: Props) {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "50px",
+          padding: "0px 50px 35px 50px",
         }}
       >
         <Logo />

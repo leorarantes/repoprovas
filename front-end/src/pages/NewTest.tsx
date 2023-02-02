@@ -88,7 +88,7 @@ function NewTest() {
 
     return (
         <>
-            <Divider sx={{ marginBottom: "35px", marginTop: "25px" }} />
+            <Divider sx={{ marginBottom: "35px" }} />
             <Box
                 sx={{
                     marginX: "auto",
@@ -129,7 +129,7 @@ function NewTest() {
                         freeSolo
                         inputValue={formData.teacher}
                         onInputChange={handleInputChange}
-                        sx={{ marginBottom: "16px", width: "450px" }}
+                        sx={{ marginTop: "50px", marginBottom: "16px", width: "700px" }}
                         renderInput={(params) => <TextField
                             {...params}
                             label="Digite o nome do professor"
@@ -141,7 +141,7 @@ function NewTest() {
                         freeSolo
                         inputValue={formData.discipline}
                         onInputChange={handleInputChange}
-                        sx={{ marginBottom: "16px", width: "450px" }}
+                        sx={{ marginBottom: "16px", width: "700px" }}
                         renderInput={(params) => <TextField
                             {...params}
                             label="Digite o nome da disciplina"
@@ -153,7 +153,7 @@ function NewTest() {
                         freeSolo
                         inputValue={formData.category}
                         onInputChange={handleInputChange}
-                        sx={{ marginBottom: "16px", width: "450px" }}
+                        sx={{ marginBottom: "16px", width: "700px" }}
                         renderInput={(params) => <TextField
                             {...params}
                             label="Digite o nome da categoria"
@@ -165,7 +165,7 @@ function NewTest() {
                         freeSolo
                         inputValue={formData.pdfUrl}
                         onInputChange={handleInputChange}
-                        sx={{ marginBottom: "16px", width: "450px" }}
+                        sx={{ marginBottom: "16px", width: "700px" }}
                         renderInput={(params) => <TextField
                             {...params}
                             label="Digite a URL da prova"
@@ -177,7 +177,7 @@ function NewTest() {
                         freeSolo
                         inputValue={formData.name}
                         onInputChange={handleInputChange}
-                        sx={{ marginBottom: "16px", width: "450px" }}
+                        sx={{ marginBottom: "16px", width: "700px" }}
                         renderInput={(params) => <TextField
                             {...params}
                             label="Digite o nome da prova"
