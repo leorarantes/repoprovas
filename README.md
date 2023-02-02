@@ -12,6 +12,8 @@ Deploy: https://repoprovas-project.vercel.app
 ## 💻 Technologies and Concepts
 
 ### Front-end
+- HTML
+- CSS
 - TypeScript
 - React.js
 - Material-UI
