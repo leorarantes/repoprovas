@@ -7,6 +7,8 @@ Full-Stack project of RepoProvas, a tests sharing platform.
 
 RepoProvas is a web browser application that provides a platform for students to share their tests with another students. Tests are organized by period or by the teacher who taught the class, allowing for easy navigation and study.
 
+Deploy: https://repoprovas-project.vercel.app
+
 ## 💻 Technologies and Concepts
 
 ### Front-end
