@@ -13,6 +13,7 @@ RepoProvas is a web browser application that provides a platform for students to
 - TypeScript
 - React.js
 - Material-UI
+- OAuth Authentication
 - Vercel
 
 ### Back-end
